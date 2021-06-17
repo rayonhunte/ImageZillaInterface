@@ -1,1 +1,76 @@
-<p>shell works!</p>
+<!-- <p>shell works!</p> -->
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="false">
+      <mat-toolbar>
+        <span class="logo" routerLink="/" *ngIf="(isHandset$ | async)">
+          <!-- <img src="assets/images/logo_transparent.png" alt="Logo" class="logoImage-side"> -->
+          🌲
+        </span>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/login" (click)="drawer.close()" *ngIf="true">
+          🔑 <mat-icon>login</mat-icon>
+        </a>
+        <a mat-list-item routerLink="/home" (click)="drawer.close()">
+          <mat-icon>home</mat-icon>
+        </a>  
+        <!-- show when user logged in -->
+        <!-- <div *ngIf="(afAuth.authState | async)">
+          <a mat-list-item (click)="drawer.close()" *ngIf="(afAuth.authState | async)" appAuthLogout>
+            <mat-icon>logout</mat-icon>
+          </a>
+          <a mat-list-item (click)="drawer.close()" *ngIf="(afAuth.authState | async)" routerLink="/profile">
+            <mat-icon>face</mat-icon>
+          </a>
+          <a mat-button routerLink="/admin" *ngIf="(regUser$| async)?.type === 'Admin'" (click)="drawer.close()">
+            <mat-icon>settings</mat-icon>
+          </a>
+        </div> -->
+        <!-- show when user logged in -->
+        <a mat-list-item routerLink="/help" (click)="drawer.close()">
+          <mat-icon>help</mat-icon>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span class="logo" routerLink="/" *ngIf="!(isHandset$ | async)">
+          <!-- <img src="assets/images/logo_transparent.png" alt="Logo" class="logoImage"> -->
+          🌲
+        </span>
+        <span class="fill-space"></span>
+        <div *ngIf="true">
+          <!-- <a mat-button routerLink="/login" *ngIf="!(afAuth.authState | async)"   matTooltip="LOGIN">
+            🔑 <mat-icon>login</mat-icon>
+          </a> -->
+          <a mat-button routerLink="/show" matTooltip="HOME">
+            <mat-icon>home</mat-icon>
+          </a>
+          <!-- <section *ngIf="(afAuth.authState | async)"> -->
+            <!-- <a mat-button *ngIf="(afAuth.authState | async)" appAuthLogout matTooltip="LOGOUT">
+              <mat-icon>logout</mat-icon>
+            </a>
+            <a mat-button *ngIf="(afAuth.authState | async)" routerLink="/profile" matTooltip="PROFILE">
+              <mat-icon>face</mat-icon>
+            </a>
+            <a mat-button routerLink="/admin" 
+            *ngIf="(regUser$| async)?.type === 'Admin' && (afAuth.authState | async)"
+            matTooltip="ADMIN"
+            >
+              <mat-icon>settings</mat-icon>
+            </a> -->
+          <!-- </section> -->
+          <a mat-button routerLink="/help"   matTooltip="HELP">
+            <mat-icon>help</mat-icon>
+          </a>
+        </div>
+      </mat-toolbar>
+      <br>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
